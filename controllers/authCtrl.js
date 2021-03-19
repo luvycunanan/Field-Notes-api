@@ -16,7 +16,6 @@ const login = async (req, res) => {
     // Create jwt token with userId
     const payload = { userID: user._id};
     const secret = process.env.JWT_SECRET;
-    console.log(payload)
     const exp = { expiresIn: '30d' };
 
     // Sign jwt
@@ -29,21 +28,7 @@ const login = async (req, res) => {
 }
 
 const verify = async (req, res) => {
-  const { token } = req.body;
-  console.log(token)
-  if (!token) return res.json('Error, Please log in')
-  
-  try {
-    const decodedToken = await jwt.verify();
-    
-    console.log(decodedToken = ' is decoded')
-    res.json('tokens match')
-
-  }
-  catch (err) {
-    if (err) return res.json({status: 400, message: 'Something went wrong. Please try again'})
-  }
-  // res.json('verify hit')
+  res.json({status: 200, userId: req.currentUserId})
 }
 
 module.exports = {

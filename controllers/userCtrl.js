@@ -26,7 +26,18 @@ const create = async (req, res) => {
   }
 }
 
+const profile = async (req, res) => {
+  try {
+    const user = await db.User.findById(req.currentUserId);
+    return res.json({status: 200, profile: user})
+  }
+  catch (err) {
+    res.json({status: 500, error: 'Something went wrong. Please try again'})
+  }
+}
+
 
 module.exports = {
   create,
+  profile,
 }
