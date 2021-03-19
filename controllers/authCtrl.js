@@ -14,7 +14,7 @@ const login = async (req, res) => {
     if (!isMatch) return res.json('Your email or password does not match our records, please try again')
     
     // Create jwt token with userId
-    const payload = { userID: user._id};
+    const payload = { userId: user._id};
     const secret = process.env.JWT_SECRET;
     const exp = { expiresIn: '30d' };
 
