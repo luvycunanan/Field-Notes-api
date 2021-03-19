@@ -5,12 +5,12 @@ const create = async (req, res) => {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
-    return res.json({status: 400, message: 'All fields required'});
+    return res.status(400).json({status: 400, message: 'All fields required'});
   }
 
   try {
     const foundUser = await db.User.findOne({ email });
-    if (foundUser) return res.json({status: 400, error: 'Account already exist'})
+    if (foundUser) return res.status(400).json({status: 400, error: 'Account already exist. Please login'})
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
     const userData = {
@@ -22,7 +22,7 @@ const create = async (req, res) => {
     res.json(newUser);
   } 
   catch (err) {
-    return res.json({status: 500, message: 'Something went wrong. Please try again'})
+    return res.status(500).json({status: 500, message: 'Something went wrong. Please try again'})
   }
 }
 
