@@ -3,7 +3,7 @@ const controllers = require('../controllers');
 const auth = require('../middleware/auth');
 
 router.get('/', controllers.destinations.index);
-router.get('/:id', auth, controllers.destinations.show);
+router.get('/:id', controllers.destinations.show);
 router.post('/', controllers.destinations.create);
 router.put('/:id', controllers.destinations.update);
 router.delete('/:id', controllers.destinations.destroy);
